@@ -5,8 +5,10 @@ var ejs = require('ejs');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var d3 = require('d3');
-const PORT = process.env.PORT || 3000
+
+var app = express();
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 var votingData = require('../models/votingSchema');
 
@@ -25,15 +27,12 @@ mongoose.connect(process.env.MONGODB_URI).then(function () {
   return console.log('Server disconnected');
 });
 
-var app = express();
-
 app.set('view engine', 'ejs');
-app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(VotingRoute);
 
-app.listen(PORT, function () {
-  return console.log(`server on port: ${PORT}` );
+app.listen(3000, function () {
+  return console.log('server on port: ');
 });
 console.log(process.env.MONGODB_URI);
