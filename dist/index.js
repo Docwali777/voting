@@ -5,8 +5,8 @@ var ejs = require('ejs');
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var PORT = process.env.PORT || 3000;
-
+var PORT = process.env.PORT
+console.log(PORT);
 var app = express();
 
 app.use(express.static('public/css/'));

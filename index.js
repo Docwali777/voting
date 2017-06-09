@@ -9,9 +9,9 @@ const app = express()
 
 app.use(express.static('public/css/'))
 
-const votingData = require('../models/votingSchema')
+const votingData = require('./models/votingSchema')
 
-const VotingRoute = require('../routes/voting')
+const VotingRoute = require('./routes/voting')
 
 //mongoose DATABASE
 const mongoose = require('mongoose')
