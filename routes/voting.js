@@ -2,6 +2,7 @@ const express = require('express');
 const app = express()
 const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema')
+const d3 = require('d3');
 
 app.use((res, req, next)=>{
   res.locals.votingApp = votingData
