@@ -1,39 +1,75 @@
 'use strict';
 
-var output = require('d3node-output');
-var ejs = require('ejs');
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var PORT = process.env.PORT
-console.log(PORT);
-var app = express();
+var _d3nodeOutput = require('d3node-output');
 
-app.use(express.static('public/css/'));
+var _d3nodeOutput2 = _interopRequireDefault(_d3nodeOutput);
 
-var votingData = require('../models/votingSchema');
+var _ejs = require('ejs');
 
-var VotingRoute = require('../routes/voting'
+var _ejs2 = _interopRequireDefault(_ejs);
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _votingSchema = require('../models/votingSchema');
+
+var _votingSchema2 = _interopRequireDefault(_votingSchema);
+
+var _voting = require('../routes/voting');
+
+var _voting2 = _interopRequireDefault(_voting);
+
+var _mongoose = require('mongoose');
+
+var _mongoose2 = _interopRequireDefault(_mongoose);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PORT = process.env.PORT || 3000;
+
+//MONGODB Modesl
+
+
+//Routes
+
 
 //mongoose DATABASE
-);var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
-// mongoose.connect('mongodb://localhost/d3_vote')
-var MONGODB_URI = 'mongodb://admin:admin@ds119302.mlab.com:19302/voting';
+_mongoose2.default.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URI).then(function () {
+var MONGODB_URI = void 0;
+
+if (process.env.NODE_ENV == 'development') {
+  MONGODB_URI = 'mongodb://localhost/d3_vote';
+} else {
+  MONGODB_URI = process.env.MONGODB_URI;
+}
+
+_mongoose2.default.connect(MONGODB_URI).then(function () {
   return console.log('connected to MONGODB server');
 }).catch(function (err) {
   return console.log('Server disconnected');
 });
 
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
+var app = (0, _express2.default)();
 
-app.use(VotingRoute);
+app.use(_express2.default.static('public/css/'));
+app.set('view engine', 'ejs');
+app.use(_bodyParser2.default.urlencoded({ extended: false }));
+
+app.use(_voting2.default);
 
 app.listen(PORT, function () {
-  return console.log('server on port: ');
+  return console.log('server on port: ' + PORT + ' ');
 });
-console.log(process.env.MONGODB_URI);
+console.log(MONGODB_URI);
+console.log(process.env.NODE_ENV);
