@@ -20,6 +20,8 @@
     "nodemon": "1.11.0"
   },
   "scripts": {
-    "start": "nodemon server.js --exec babel-node"
+    "start": "nodemon lib/server.js --exec babel-node",
+    "build": "babel lib -d dist --presets es2015",
+    "serve": "node dist/index.js"
   }
 }
