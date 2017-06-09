@@ -17,7 +17,7 @@
     "mongoose": "4.10.5"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node lib/index.js"
 },
   "repository": {
     "type": "git",
