@@ -3,6 +3,7 @@ const ejs = require('ejs')
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const d3 = require('d3')
 
 const votingData = require('./models/votingSchema')
 
