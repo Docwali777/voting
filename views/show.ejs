@@ -1,0 +1,13 @@
+<% include partials/header %>
+
+<h1>Title: <%= votingApp.title %> </h1>
+
+<form action="/voting/<%= votingApp._id %>" method='get'>
+  <input type="checkbox" value='<%= votingApp.one %>' name='one'> <%= votingApp.one.slice(0,1) %>
+  <input type="checkbox" value='<%= votingApp.two %>' name='two'> <%= votingApp.two.slice(0,1) %>
+  <button>Submit</button>
+</form>
+<div id="chart"></div>
+<%- svg %>
+
+<a href="/">Home</a>

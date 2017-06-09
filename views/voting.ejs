@@ -1,0 +1,12 @@
+<% include partials/header %>
+
+<h1>Votes Created Thus Far</h1>
+<form action="/voting" method="post">
+  <legend>New App</legend>
+  <input type="text" name='title' placeholder="Enter Title">
+  <input type="text" name='name1' placeholder='Enter Info'>
+  <input type="text" name='name2' placeholder="Enter info">
+  <button>Create App</button>
+</form>
+
+<a href="/voting/new">Create a new Vote</a>
