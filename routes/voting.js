@@ -4,21 +4,24 @@ const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema')
 
 app.use((res, req, next)=>{
-  // res.locals.votingApp = votingApp
-  console.log(votingApp);
+  res.locals.votingApp = votingData
+  console.log(votingData);
   next()
 })
 
 route.get('/', (req, res)=>{
-  res.render('index', {
-    svg: '',
-    votingApp: []
-  })
+  res.render('landing')
 })
 
-
 route.get('/voting', (req, res)=>{
-  res.render('voting')
+  votingData.find({}, (err, votingApp)=>{
+    if(err){console.log('error getting data to voting page')}
+    else {
+      res.render('index', {
+        votingApp
+      })
+    }
+  })
 })
 
 route.post('/voting', (req, res)=>{
@@ -43,22 +46,15 @@ votingData.create({
 })
 })
 
+route.get('/voting/new', (req, res)=>{
+  res.render('voting')
+})
+
 route.get('/voting/:id', (req, res)=>{
   votingData.findById(req.params.id, (err, votingApp)=>{
     if(err){console.log(err);}
     else{
-// console.log(votingApp);
-// console.log(req.query.choice === votingApp.two[0]);
-//       if(req.query.choice === votingApp.two[0]){
-// console.log(req.query.choice);
-//         votingApp.two.push(req.query.choice)
-// votingApp.save()
-//
-//       } else if(req.query.choice === votingApp.one[0]){
-//   votingApp.one.push(req.query.choice)
-//     votingApp.save()
-//       }
-//         console.log(`One: ${votingApp.one.length}}, Two: ${votingApp.two.length}`);
+
 
 // console.log(votingApp);
       res.render('show', {
@@ -123,8 +119,6 @@ route.post('/voting/:id', (req, res)=>{
 votingData.findById(req.params.id, (err, votingApp)=>{
   if(err){console.log('error posting voting Data')}
   else {
-    // console.log(req.query.choice);
-    console.log("choice: ", req.body.choice.split(',')[0]);
 
     if(req.body.choice ===votingApp.two[0]){
     votingApp.two.push(req.body.choice)
@@ -135,8 +129,6 @@ votingData.findById(req.params.id, (err, votingApp)=>{
   votingApp.save()
   console.log(votingApp.one.length-1)
 }
-
-
   res.redirect(`/voting/${votingApp._id}`)
   }
 })

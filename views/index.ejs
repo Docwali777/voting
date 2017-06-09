@@ -1,15 +1,14 @@
 <% include partials/header %>
 
 
-<h1>Voting Application</h1>
+  <h1>Voting Application</h1>
 
-<% votingApp.map(data=>{ %>
-  <p>
-    <%= data.title %>
-  </p>
-<a href="/voting/<%= data._id %>"><button>Vote</button></a>
-<% }) %>
+  <% votingApp.map(data=>{ %>
+    <p>
+      <%= data.title %>
+    </p>
+    <a href="/voting/<%= data._id %>"><button>Vote</button></a>
+    <% }) %>
 
-<a href="/voting">Create a Vote App</a>
-<div id='chart'></div>
-<h1>Bellow</h1>
+      <a href="/voting/new"><button type="button" name="button">Create Vote</button></a>
+      <div id='chart'></div>

@@ -1,25 +1,23 @@
-import d3node from 'd3-node'
-import d3 from 'd3'
-import output from 'd3node-output'
-import ejs from 'ejs'
-import express from 'express'
-import path from 'path'
+const output = require('d3node-output')
+const ejs = require('ejs')
+const express = require('express')
+const path = require('path')
+const bodyParser = require('body-parser')
+
+const votingData = require('./models/votingSchema')
+
+const VotingRoute = require('./routes/voting')
 
 //mongoose DATABASE
-import mongoose from 'mongoose'
-let {Schema} = mongoose
+const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-import bodyParser from 'body-parser'
 
-import votingData from './models/votingSchema'
+// mongoose.connect('mongodb://localhost/d3_vote')
+const MONGODB_URI = 'mongodb://admin:admin@ds119302.mlab.com:19302/voting'
 
-import VotingRoute from './routes/voting'
-
-
-mongoose.connect('mongodb://localhost/d3_vote')
+mongoose.connect(MONGODB_URI)
 .then(()=>console.log('connected to MONGODB server'))
-
-
+.catch(err=>console.log('Server disconnected'))
 
 const app = express()
 
@@ -30,3 +28,4 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(VotingRoute)
 
 app.listen(3000, ()=> console.log('server on port: '))
+console.log(app.get('env'))
