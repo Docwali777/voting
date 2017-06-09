@@ -91,6 +91,11 @@ var color = d3.scaleOrdinal(d3.schemeCategory10)
             rect.attr('height', (d, i)=>{
               return h - yScale(d)
             })
+            .transition()
+            .duration(1000)
+            .delay(function (d, i) {
+				return i * 50;
+			})
             .attr('width', (d, i)=>{
               return 70
             })
