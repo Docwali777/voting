@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static('public/css/'));
 
 var votingData = require('../models/votingSchema');
 
