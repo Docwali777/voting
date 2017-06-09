@@ -16,10 +16,18 @@
     "jsdom": "3.1.2",
     "mongoose": "4.10.5"
   },
-  "devDependencies": {
-    "nodemon": "1.11.0"
-  },
   "scripts": {
     "start": "node dist/index.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Docwali777/voting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Docwali777/voting/issues"
+  },
+  "homepage": "https://github.com/Docwali777/voting#readme",
+  "description": ""
 }
