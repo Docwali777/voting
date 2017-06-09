@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(VotingRoute);
 
-app.listen(3000, function () {
+app.listen(PORT, function () {
   return console.log('server on port: ');
 });
 console.log(process.env.MONGODB_URI);
