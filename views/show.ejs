@@ -1,13 +1,15 @@
 <% include partials/header %>
 
-<h1>Title: <%= votingApp.title %> </h1>
+  <h1>Title: <%= votingApp.title %> </h1>
 
-<form action="/voting/<%= votingApp._id %>" method='get'>
-  <input type="checkbox" value='<%= votingApp.one %>' name='one'> <%= votingApp.one.slice(0,1) %>
-  <input type="checkbox" value='<%= votingApp.two %>' name='two'> <%= votingApp.two.slice(0,1) %>
-  <button>Submit</button>
-</form>
-<div id="chart"></div>
-<%- svg %>
+  <form action="/voting/<%= votingApp._id %>" method='post'>
+    <input type="radio" value='<%= votingApp.one[0] %>' name='choice'>
+    <%= votingApp.one.slice(0,1) %>
+      <input type="radio" value='<%= votingApp.two[0] %>' name='choice'>
+      <%= votingApp.two.slice(0,1) %>
+        <button class='btn btn-success' type=' submit '>Submit</button>
+  </form>
+  <div id="chart"></div>
+  <%- svg %>
 
-<a href="/">Home</a>
+    <a href="/">Home</a>

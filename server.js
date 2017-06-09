@@ -3,6 +3,7 @@ import d3 from 'd3'
 import output from 'd3node-output'
 import ejs from 'ejs'
 import express from 'express'
+import path from 'path'
 
 //mongoose DATABASE
 import mongoose from 'mongoose'
@@ -23,45 +24,8 @@ mongoose.connect('mongodb://localhost/d3_vote')
 const app = express()
 
 app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: false}))
-let votingApp = []
-
-
-// app.get('/', (req, res)=>{
-//   votingData.find({}, (err, votingApp)=>{
-//     if(err){ console.log(err);}
-//     else {
-//       res.render('index', {
-//         votingApp
-//       })
-//     }
-//   })
-// })
-
-
-
-// app.get('/voting', (req, res)=>{
-//   res.render('voting')
-// })
-// app.post('/voting', (req, res)=>{
-// votingData.create({
-//   title: req.body.title,
-//   one: req.body.name1,
-//   two: req.body.name2
-// }, (err, votingApp)=>{
-//   if(err){console.log('Error create voting data')}
-//   else {
-//     votingData.find({}, (err, votingApp)=>{
-//       if(err){console.log(err);}
-//       else {
-//         console.log(votingApp);
-//         res.redirect('/')
-//       }
-//     })
-//   }
-// })
-// })
-
 
 app.use(VotingRoute)
 

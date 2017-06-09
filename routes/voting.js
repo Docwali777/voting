@@ -44,26 +44,28 @@ votingData.create({
 })
 
 route.get('/voting/:id', (req, res)=>{
-
   votingData.findById(req.params.id, (err, votingApp)=>{
     if(err){console.log(err);}
     else{
-
-      if(req.query.hasOwnProperty('two')){
-        votingApp.two.push([req.query.two])
-votingApp.save()
-
-      } else if(req.query.hasOwnProperty('one')){
-  votingApp.one.push([req.query.one])
-    votingApp.save()
-      }
-        console.log(votingApp.two.length);
+// console.log(votingApp);
+// console.log(req.query.choice === votingApp.two[0]);
+//       if(req.query.choice === votingApp.two[0]){
+// console.log(req.query.choice);
+//         votingApp.two.push(req.query.choice)
+// votingApp.save()
+//
+//       } else if(req.query.choice === votingApp.one[0]){
+//   votingApp.one.push(req.query.choice)
+//     votingApp.save()
+//       }
+//         console.log(`One: ${votingApp.one.length}}, Two: ${votingApp.two.length}`);
 
 // console.log(votingApp);
       res.render('show', {
         svg:  (`<script>
-          let h = 400,
-              w = 400,
+
+          let h = 200,
+              w = 200,
               data = [${votingApp.one.length}-1, ${votingApp.two.length}-1]
 
 
@@ -115,6 +117,29 @@ var color = d3.scaleOrdinal(d3.schemeCategory10)
       })
     }
   })
+})
+
+route.post('/voting/:id', (req, res)=>{
+votingData.findById(req.params.id, (err, votingApp)=>{
+  if(err){console.log('error posting voting Data')}
+  else {
+    // console.log(req.query.choice);
+    console.log("choice: ", req.body.choice.split(',')[0]);
+
+    if(req.body.choice ===votingApp.two[0]){
+    votingApp.two.push(req.body.choice)
+    votingApp.save()
+    console.log(votingApp.two.length-1);
+  } else if(req.body.choice ===votingApp.one[0]){
+  votingApp.one.push(req.body.choice)
+  votingApp.save()
+  console.log(votingApp.one.length-1)
+}
+
+
+  res.redirect(`/voting/${votingApp._id}`)
+  }
+})
 })
 
 module.exports = route
