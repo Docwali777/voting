@@ -15,7 +15,7 @@ mongoose.Promise = global.Promise
 // mongoose.connect('mongodb://localhost/d3_vote')
 const MONGODB_URI = 'mongodb://admin:admin@ds119302.mlab.com:19302/voting'
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
 .then(()=>console.log('connected to MONGODB server'))
 .catch(err=>console.log('Server disconnected'))
 
@@ -28,4 +28,4 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(VotingRoute)
 
 app.listen(3000, ()=> console.log('server on port: '))
-console.log(app.get('env'))
+console.log(process.env.MONGODB_URI);
