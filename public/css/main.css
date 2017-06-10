@@ -1,0 +1,19 @@
+.navbar-inverse .navbar-brand {
+  color: white
+}
+.navbar-inverse .navbar-brand:hover{
+  color: yellow
+}
+div.panel-body.text-center {
+font-weight: 300;
+font-size: 1.5em
+}
+
+div.panel-body.text-center:hover {
+  background: #7F2982;
+  color: white
+}
+button.btn.btn-primary.pull-right:hover{
+color: white;
+background: #5cb85c
+}

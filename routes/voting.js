@@ -5,8 +5,7 @@ const votingData = require('../models/votingSchema')
 const d3 = require('d3');
 
 app.use((res, req, next)=>{
-  res.locals.votingApp = votingData
-  console.log(votingData);
+  res.locals.votingApp = votingApp
   next()
 })
 
