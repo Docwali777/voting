@@ -24,6 +24,10 @@ var _votingSchema = require('../models/votingSchema');
 
 var _votingSchema2 = _interopRequireDefault(_votingSchema);
 
+var _user = require('../models/user');
+
+var _user2 = _interopRequireDefault(_user);
+
 var _voting = require('../routes/voting');
 
 var _voting2 = _interopRequireDefault(_voting);
@@ -36,12 +40,18 @@ var _removevoting = require('../routes/removevoting');
 
 var _removevoting2 = _interopRequireDefault(_removevoting);
 
+var _auth = require('../routes/auth/auth');
+
+var _auth2 = _interopRequireDefault(_auth);
+
 var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 //PORT
 var PORT = process.env.PORT || 3000;
 
@@ -63,21 +73,36 @@ if (process.env.NODE_ENV == 'development') {
   MONGODB_URI = process.env.MONGODB_URI;
 }
 
+var app = (0, _express2.default)();
+
+app.use(_express2.default.static('public/css/'));
+app.set('view engine', 'ejs');
+app.use(_bodyParser2.default.urlencoded({ extended: false })
+
+//Authentification
+);app.use(require('express-session')({
+  secret: 'my baby',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(_user2.default.authenticate()));
+passport.serializeUser(_user2.default.serializeUser());
+passport.deserializeUser(_user2.default.deserializeUser()
+
+//ROUTES
+);app.use(_createnewvote2.default);
+app.use(_voting2.default);
+app.use(_removevoting2.default);
+app.use(_auth2.default);
+
 _mongoose2.default.connect(MONGODB_URI).then(function () {
   return console.log('connected to MONGODB server');
 }).catch(function (err) {
   return console.log('Server disconnected');
 });
-
-var app = (0, _express2.default)();
-
-app.use(_express2.default.static('public/css/'));
-app.set('view engine', 'ejs');
-app.use(_bodyParser2.default.urlencoded({ extended: false }));
-
-app.use(_createnewvote2.default);
-app.use(_voting2.default);
-app.use(_removevoting2.default);
 
 app.listen(PORT, function () {
   return console.log('server on port: ' + PORT + ' ');
