@@ -1,5 +1,5 @@
 const express = require('express');
-const route = express.Router()
+const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema');
 
 let isLoggedin = (req, res, next)=>{
