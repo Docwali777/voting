@@ -2,7 +2,14 @@ const express = require('express');
 const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema')
 
-route.get('/voting/new', (req, res)=>{
+let isLoggedin = (req, res, next)=>{
+  if(req.isAuthenticated()){
+    return next()
+  }
+  res.redirect('/login')
+}
+
+route.get('/voting/new',isLoggedin,  (req, res)=>{
   res.render('voting')
 })
 

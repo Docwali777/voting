@@ -3,6 +3,12 @@ const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema')
 const d3 = require('d3');
 
+let isLoggedin = (req, res, next)=>{
+  if(req.isAuthenticated()){
+    return next()
+  }
+}
+
 
 route.get('/', (req, res)=>{
   res.render('landing')
