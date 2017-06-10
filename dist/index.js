@@ -1,4 +1,4 @@
-heroku logs 'use strict';
+'use strict';
 
 var _d3nodeOutput = require('d3node-output');
 
@@ -52,6 +52,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var expressSession = require('express-session');
 //PORT
 var PORT = process.env.PORT || 3000;
 
@@ -67,7 +68,7 @@ _mongoose2.default.Promise = global.Promise;
 
 var MONGODB_URI = void 0;
 
-if (process.env.NODE_ENV == 'development') {
+if (process.env.NODE_ENV !== 'production') {
   MONGODB_URI = 'mongodb://localhost/d3_vote';
 } else {
   MONGODB_URI = process.env.MONGODB_URI;
@@ -80,7 +81,7 @@ app.set('view engine', 'ejs');
 app.use(_bodyParser2.default.urlencoded({ extended: false })
 
 //Authentification
-);app.use(require('express-session')({
+);app.use(expressSession({
   secret: 'my baby',
   resave: false,
   saveUninitialized: false
