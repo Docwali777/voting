@@ -1,4 +1,4 @@
-'use strict';
+heroku logs 'use strict';
 
 var _d3nodeOutput = require('d3node-output');
 
