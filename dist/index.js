@@ -91,7 +91,12 @@ app.use(passport.session());
 
 passport.use(new LocalStrategy(_user2.default.authenticate()));
 passport.serializeUser(_user2.default.serializeUser());
-passport.deserializeUser(_user2.default.deserializeUser()
+passport.deserializeUser(_user2.default.deserializeUser());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+}
 
 //ROUTES
 );app.use(_createnewvote2.default);
@@ -108,5 +113,3 @@ _mongoose2.default.connect(MONGODB_URI).then(function () {
 app.listen(PORT, function () {
   return console.log('server on port: ' + PORT + ' ');
 });
-console.log(MONGODB_URI);
-console.log(process.env.NODE_ENV);

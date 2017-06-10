@@ -21,14 +21,15 @@ console.log(req.body);
     else {
       req.body = ''
       res.render('index', {
-        votingApp
+        votingApp,
+        user: req.user
       })
     }
   })
 })
 
 
-route.get('/voting/:id', (req, res)=>{
+route.get('/voting/:id', isLoggedin, (req, res)=>{
   votingData.findById(req.params.id, (err, votingApp)=>{
     if(err){console.log(err);}
     else{
