@@ -1,22 +1,19 @@
 const express = require('express');
-const app = express()
 const route = express.Router({mergeParams: true})
 const votingData = require('../models/votingSchema')
 const d3 = require('d3');
 
-app.use((res, req, next)=>{
-  res.locals.votingApp = votingApp
-  next()
-})
 
 route.get('/', (req, res)=>{
   res.render('landing')
 })
 
 route.get('/voting', (req, res)=>{
+console.log(req.body);
   votingData.find({}, (err, votingApp)=>{
     if(err){console.log('error getting data to voting page')}
     else {
+      req.body = ''
       res.render('index', {
         votingApp
       })
@@ -24,39 +21,12 @@ route.get('/voting', (req, res)=>{
   })
 })
 
-route.post('/voting', (req, res)=>{
-votingData.create({
-  title: req.body.title,
-  one: [req.body.name1],
-  two: [req.body.name2]
-}, (err, votingApp)=>{
-  if(err){console.log('Error create voting data')}
-  else {
-    votingData.find({}, (err, votingApp)=>{
-      if(err){console.log(err);}
-      else {
-        let svg = (`<script>d3.select('#chart').append('p').html(3) </script>`)
-        res.render('index', {
-          votingApp,
-          svg
-        })
-      }
-    })
-  }
-})
-})
-
-route.get('/voting/new', (req, res)=>{
-  res.render('voting')
-})
 
 route.get('/voting/:id', (req, res)=>{
   votingData.findById(req.params.id, (err, votingApp)=>{
     if(err){console.log(err);}
     else{
 
-
-// console.log(votingApp);
       res.render('show', {
         svg:  (`<script>
 
@@ -133,5 +103,6 @@ votingData.findById(req.params.id, (err, votingApp)=>{
   }
 })
 })
+
 
 module.exports = route

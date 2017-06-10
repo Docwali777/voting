@@ -7,11 +7,12 @@
     <div class='panel panel-default'>
     <div class="panel-body text-center">
 <%= data.title %>
-        <a href="/voting/<%= data._id %>">  <button class=' btn btn-primary pull-right'>Vote</button></a>
 
+        <a  class='pull-right' href="/voting/<%= data._id %>/remove">  <button class='btn btn-danger'>Delete</button></a>
+<a  class='pull-right' href="/voting/<%= data._id %>"> <button class='btn btn-primary'>Vote </button></a>
     </div>
       </div>
 
     <% }) %>
 
-      <a href="/voting/new"><button type="button" name="button">Create Vote</button></a>
+      <a href="/voting/new"><button class='btn btn-success form-control' name="button">Create Vote</button></a>

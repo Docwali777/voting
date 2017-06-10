@@ -28,12 +28,21 @@ var _voting = require('../routes/voting');
 
 var _voting2 = _interopRequireDefault(_voting);
 
+var _createnewvote = require('../routes/createnewvote');
+
+var _createnewvote2 = _interopRequireDefault(_createnewvote);
+
+var _removevoting = require('../routes/removevoting');
+
+var _removevoting2 = _interopRequireDefault(_removevoting);
+
 var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//PORT
 var PORT = process.env.PORT || 3000;
 
 //MONGODB Modesl
@@ -66,7 +75,9 @@ app.use(_express2.default.static('public/css/'));
 app.set('view engine', 'ejs');
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
+app.use(_createnewvote2.default);
 app.use(_voting2.default);
+app.use(_removevoting2.default);
 
 app.listen(PORT, function () {
   return console.log('server on port: ' + PORT + ' ');
